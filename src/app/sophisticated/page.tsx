@@ -10,7 +10,7 @@ const SophisticatedFooter = dynamic(() => import("@/components/sophisticated/Sop
 
 export default function SophisticatedPage() {
   return (
-    <div style={{ backgroundColor: "#0a0a0a", color: "#f5f5f5" }}>
+    <div style={{ backgroundColor: "#fafafa", color: "#0a0a0a" }}>
       <SophisticatedNav />
       <main>
         <SophisticatedHero />

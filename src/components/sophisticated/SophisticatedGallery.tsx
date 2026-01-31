@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useBodyScrollLock } from "@/hooks/use-body-scroll-lock";
 import { artworks, collections } from "@/lib/data";
 import type { Artwork } from "@/lib/types";
 
@@ -25,19 +26,17 @@ function Lightbox({
 }) {
   const art = items[index];
 
+  useBodyScrollLock(isOpen);
+
   useEffect(() => {
     if (!isOpen) return;
-    document.body.style.overflow = "hidden";
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") onPrev();
       if (e.key === "ArrowRight") onNext();
     };
     window.addEventListener("keydown", handler);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handler);
-    };
+    return () => window.removeEventListener("keydown", handler);
   }, [isOpen, onClose, onPrev, onNext]);
 
   return (
@@ -48,7 +47,7 @@ function Lightbox({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-2xl"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-white/95 backdrop-blur-2xl"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
@@ -57,7 +56,7 @@ function Lightbox({
           {/* Close */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.08] text-[#777] transition-colors hover:text-[#f5f5f5]"
+            className="absolute top-6 right-6 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[#e5e5e5] text-[#999] transition-colors hover:text-[#0a0a0a]"
             aria-label="Close"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
@@ -68,7 +67,7 @@ function Lightbox({
           {/* Prev — side on desktop, bottom-left on mobile */}
           <button
             onClick={(e) => { e.stopPropagation(); onPrev(); }}
-            className="absolute z-10 flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/[0.08] text-[#666] transition-colors hover:text-[#f5f5f5] bottom-6 left-[calc(50%-60px)] md:bottom-auto md:left-8 md:top-1/2 md:-translate-y-1/2"
+            className="absolute z-10 flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#e5e5e5] text-[#999] transition-colors hover:text-[#0a0a0a] bottom-6 left-[calc(50%-60px)] md:bottom-auto md:left-8 md:top-1/2 md:-translate-y-1/2"
             aria-label="Previous"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
@@ -79,7 +78,7 @@ function Lightbox({
           {/* Next — side on desktop, bottom-right on mobile */}
           <button
             onClick={(e) => { e.stopPropagation(); onNext(); }}
-            className="absolute z-10 flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/[0.08] text-[#666] transition-colors hover:text-[#f5f5f5] bottom-6 right-[calc(50%-60px)] md:bottom-auto md:right-8 md:top-1/2 md:-translate-y-1/2"
+            className="absolute z-10 flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-[#e5e5e5] text-[#999] transition-colors hover:text-[#0a0a0a] bottom-6 right-[calc(50%-60px)] md:bottom-auto md:right-8 md:top-1/2 md:-translate-y-1/2"
             aria-label="Next"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
@@ -116,20 +115,20 @@ function Lightbox({
               )}
             </div>
             <div className="mt-4 md:mt-6 text-center">
-              <h3 className="font-display text-xl italic text-[#f5f5f5] md:text-3xl">
+              <h3 className="font-display text-xl italic text-[#0a0a0a] md:text-3xl">
                 {art.title}
               </h3>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-[#555] font-body">
+              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-[#999] font-body">
                 {art.collectionName}
               </p>
             </div>
           </motion.div>
 
           {/* Counter */}
-          <div className="absolute bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-body tracking-[0.2em] text-[#444] hidden md:block">
+          <div className="absolute bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-body tracking-[0.2em] text-[#bbb] hidden md:block">
             {index + 1} / {items.length}
           </div>
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-body tracking-[0.2em] text-[#444] md:hidden">
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-body tracking-[0.2em] text-[#bbb] md:hidden">
             {index + 1} / {items.length}
           </div>
         </motion.div>
@@ -163,7 +162,7 @@ export default function SophisticatedGallery() {
         id="gallery"
         ref={sectionRef}
         className="relative py-28 md:py-36"
-        style={{ backgroundColor: "#0a0a0a" }}
+        style={{ backgroundColor: "#fafafa" }}
       >
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           {/* Header */}
@@ -174,17 +173,17 @@ export default function SophisticatedGallery() {
             className="mb-16 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between"
           >
             <div>
-              <p className="mb-3 text-[10px] font-body uppercase tracking-[0.35em] text-[#555]">
+              <p className="mb-3 text-[10px] font-body uppercase tracking-[0.35em] text-[#999]">
                 Selected Works
               </p>
               <h2
-                className="font-display text-[#f5f5f5] leading-[1]"
+                className="font-display text-[#0a0a0a] leading-[1]"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
               >
                 The <em className="text-[#888]">Collection</em>
               </h2>
             </div>
-            <p className="text-[11px] font-body text-[#444] md:text-right">
+            <p className="text-[11px] font-body text-[#999] md:text-right">
               {artworks.length} works across {collections.length - 1} exhibitions
             </p>
           </motion.div>
@@ -206,8 +205,8 @@ export default function SophisticatedGallery() {
                 aria-selected={filter === c.slug}
                 className={`rounded-none border px-5 py-2.5 text-[10px] font-body uppercase tracking-[0.15em] transition-all duration-400 min-h-[40px] ${
                   filter === c.slug
-                    ? "border-[#f5f5f5] bg-[#f5f5f5] text-[#0a0a0a]"
-                    : "border-[#333] text-[#666] hover:border-[#555] hover:text-[#aaa]"
+                    ? "border-[#0a0a0a] bg-[#0a0a0a] text-white"
+                    : "border-[#e5e5e5] text-[#999] hover:border-[#999] hover:text-[#333]"
                 }`}
               >
                 {c.label}
@@ -224,7 +223,7 @@ export default function SophisticatedGallery() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="grid grid-cols-2 gap-[1px] lg:grid-cols-3"
-              style={{ backgroundColor: "#222" }}
+              style={{ backgroundColor: "#e5e5e5" }}
             >
               {filtered.map((artwork, i) => (
                 <GalleryCell
@@ -238,7 +237,7 @@ export default function SophisticatedGallery() {
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <p className="py-24 text-center font-display text-lg italic text-[#444]">
+            <p className="py-24 text-center font-display text-lg italic text-[#999]">
               No works in this collection yet.
             </p>
           )}
@@ -278,7 +277,7 @@ function GalleryCell({
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.6, delay: (index % 6) * 0.06 }}
       className="group relative cursor-pointer overflow-hidden"
-      style={{ backgroundColor: "#0a0a0a" }}
+      style={{ backgroundColor: "#fafafa" }}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -298,7 +297,7 @@ function GalleryCell({
           />
         )}
         {/* Overlay — always visible on mobile, hover on desktop */}
-        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent opacity-100 md:opacity-0 transition-opacity duration-500 md:group-hover:opacity-100">
+        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#0a0a0a]/70 via-transparent to-transparent opacity-100 md:opacity-0 transition-opacity duration-500 md:group-hover:opacity-100">
           <div className="p-3 md:p-5">
             <p className="font-display text-sm md:text-lg italic text-[#f5f5f5] leading-tight">
               {artwork.title}

@@ -1,32 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { siteContent, contactInfo } from "@/lib/data";
 
 export default function SophisticatedFooter() {
-  const scrollTo = (id: string) => {
-    if (id === "#") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      const el = document.getElementById(id.replace("#", ""));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const scrollTo = useSmoothScroll();
 
   return (
-    <footer style={{ backgroundColor: "#0a0a0a" }} className="border-t border-white/[0.06]">
+    <footer style={{ backgroundColor: "#fafafa" }} className="border-t border-[#e5e5e5]">
       <div className="mx-auto max-w-[1400px] px-6 py-16 lg:px-12 lg:py-20">
         <div className="grid gap-12 md:grid-cols-3 md:gap-10">
           {/* Brand */}
           <div>
             <button
               onClick={() => scrollTo("#")}
-              className="inline-flex items-baseline gap-1 font-display text-xl text-[#f5f5f5]"
+              className="inline-flex items-baseline gap-1 font-display text-xl text-[#0a0a0a]"
               aria-label="Go to top"
             >
-              Shannon <span className="italic text-[#555]">Hutchinson</span>
+              Shannon <span className="italic text-[#999]">Hutchinson</span>
             </button>
-            <p className="mt-5 max-w-xs text-[13px] leading-relaxed text-[#444] font-body">
+            <p className="mt-5 max-w-xs text-[13px] leading-relaxed text-[#999] font-body">
               {siteContent.footer.tagline}
             </p>
             {/* Social */}
@@ -35,7 +29,7 @@ export default function SophisticatedFooter() {
                 href={contactInfo.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] text-[#555] transition-all hover:border-white/20 hover:text-[#aaa]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#999] transition-all hover:border-[#999] hover:text-[#333]"
                 aria-label="Instagram"
               >
                 <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -46,7 +40,7 @@ export default function SophisticatedFooter() {
                 href={contactInfo.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] text-[#555] transition-all hover:border-white/20 hover:text-[#aaa]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#999] transition-all hover:border-[#999] hover:text-[#333]"
                 aria-label="Facebook"
               >
                 <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -58,7 +52,7 @@ export default function SophisticatedFooter() {
 
           {/* Explore */}
           <div>
-            <h4 className="mb-5 text-[10px] uppercase tracking-[0.25em] text-[#555] font-body">
+            <h4 className="mb-5 text-[10px] uppercase tracking-[0.25em] text-[#999] font-body">
               Explore
             </h4>
             <nav className="flex flex-col gap-3" aria-label="Footer navigation">
@@ -66,7 +60,7 @@ export default function SophisticatedFooter() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-left text-[13px] text-[#444] font-body transition-colors hover:text-[#aaa]"
+                  className="text-left text-[13px] text-[#999] font-body transition-colors hover:text-[#333]"
                 >
                   {link.label}
                 </button>
@@ -76,15 +70,15 @@ export default function SophisticatedFooter() {
 
           {/* Edition switch */}
           <div>
-            <h4 className="mb-5 text-[10px] uppercase tracking-[0.25em] text-[#555] font-body">
+            <h4 className="mb-5 text-[10px] uppercase tracking-[0.25em] text-[#999] font-body">
               Editions
             </h4>
-            <p className="mb-5 text-[13px] leading-relaxed text-[#444] font-body">
+            <p className="mb-5 text-[13px] leading-relaxed text-[#999] font-body">
               Experience this portfolio in its warm, colorful edition with Caribbean light and atmosphere.
             </p>
             <Link
               href="/"
-              className="inline-flex items-center gap-3 border border-white/[0.1] px-6 py-3 text-[10px] font-body uppercase tracking-[0.2em] text-[#666] transition-all duration-500 hover:border-white/25 hover:text-[#aaa]"
+              className="inline-flex items-center gap-3 border border-[#e5e5e5] px-6 py-3 text-[10px] font-body uppercase tracking-[0.2em] text-[#666] transition-all duration-500 hover:border-[#999] hover:text-[#333]"
             >
               <span>View Warm Edition</span>
               <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -96,12 +90,12 @@ export default function SophisticatedFooter() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/[0.04]">
+      <div className="border-t border-[#e5e5e5]">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-6 py-6 sm:flex-row lg:px-12">
-          <p className="text-[11px] text-[#333] font-body">
+          <p className="text-[11px] text-[#bbb] font-body">
             {siteContent.footer.copyright}
           </p>
-          <p className="text-[11px] text-[#333] font-body">
+          <p className="text-[11px] text-[#bbb] font-body">
             Sophisticated Edition
           </p>
         </div>

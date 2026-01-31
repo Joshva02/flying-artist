@@ -69,7 +69,6 @@ export default function SophisticatedAbout() {
                 alt="Shannon Hutchinson"
                 fill
                 className="object-cover object-top"
-                style={{ filter: "grayscale(100%) contrast(1.05)" }}
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
             </div>

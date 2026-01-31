@@ -2,21 +2,18 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { artworks } from "@/lib/data";
 
 export default function SophisticatedHero() {
   const featured = artworks[0];
-
-  const handleScrollToGallery = () => {
-    const el = document.getElementById("gallery");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollTo = useSmoothScroll();
 
   return (
     <section
       id="hero"
       className="relative flex min-h-[100dvh] flex-col overflow-hidden"
-      style={{ backgroundColor: "#0a0a0a" }}
+      style={{ backgroundColor: "#fafafa" }}
     >
       {/* Noise / grain texture overlay */}
       <div
@@ -35,7 +32,7 @@ export default function SophisticatedHero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mb-8 text-[10px] font-body uppercase tracking-[0.35em] text-[#555]"
+            className="mb-8 text-[10px] font-body uppercase tracking-[0.35em] text-[#999]"
           >
             The Flying Artist
           </motion.p>
@@ -44,7 +41,7 @@ export default function SophisticatedHero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="font-display leading-[0.85] text-[#f5f5f5]"
+            className="font-display leading-[0.85] text-[#0a0a0a]"
             style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
           >
             Shannon
@@ -54,14 +51,14 @@ export default function SophisticatedHero() {
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ duration: 1, delay: 1.4, ease: "easeInOut" }}
-            className="my-6 h-px bg-[#333] lg:my-8"
+            className="my-6 h-px bg-[#e5e5e5] lg:my-8"
           />
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="font-display italic text-[#f5f5f5]/40 leading-[0.85]"
+            className="font-display italic text-[#0a0a0a]/25 leading-[0.85]"
             style={{ fontSize: "clamp(2.5rem, 7vw, 6.5rem)" }}
           >
             Hutchinson
@@ -71,22 +68,22 @@ export default function SophisticatedHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.8 }}
-            className="mt-10 max-w-xs text-[13px] font-body leading-relaxed text-[#555] lg:mt-14"
+            className="mt-10 max-w-xs text-[13px] font-body leading-relaxed text-[#888] lg:mt-14"
           >
             Where aviation meets art. Landscape paintings inspired by Caribbean
             light and the view from 40,000 feet.
           </motion.p>
 
           <motion.button
-            onClick={handleScrollToGallery}
+            onClick={() => scrollTo("#gallery")}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2.2 }}
-            className="group mt-10 inline-flex w-fit items-center gap-4 text-[10px] font-body uppercase tracking-[0.3em] text-[#888] transition-colors duration-500 hover:text-[#f5f5f5]"
+            className="group mt-10 inline-flex w-fit items-center gap-4 text-[10px] font-body uppercase tracking-[0.3em] text-[#999] transition-colors duration-500 hover:text-[#0a0a0a]"
             aria-label="View collection"
           >
             <span>View Collection</span>
-            <span className="block h-px w-8 bg-[#444] transition-all duration-500 group-hover:w-12 group-hover:bg-[#888]" />
+            <span className="block h-px w-8 bg-[#ccc] transition-all duration-500 group-hover:w-12 group-hover:bg-[#0a0a0a]" />
           </motion.button>
         </div>
 
@@ -104,7 +101,6 @@ export default function SophisticatedHero() {
                 alt={featured.title}
                 fill
                 className="object-cover"
-                style={{ filter: "grayscale(100%) contrast(1.1)" }}
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 priority
               />
@@ -114,7 +110,7 @@ export default function SophisticatedHero() {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(90deg, #0a0a0a 0%, transparent 30%), linear-gradient(0deg, #0a0a0a 0%, transparent 20%)",
+                  "linear-gradient(90deg, #fafafa 0%, transparent 30%), linear-gradient(0deg, #fafafa 0%, transparent 20%)",
               }}
             />
             {/* Artwork caption */}
@@ -124,10 +120,10 @@ export default function SophisticatedHero() {
               transition={{ delay: 2 }}
               className="absolute bottom-8 right-8 text-right"
             >
-              <p className="text-[10px] font-body uppercase tracking-[0.2em] text-[#555]">
+              <p className="text-[10px] font-body uppercase tracking-[0.2em] text-[#999]">
                 {featured.collectionName}
               </p>
-              <p className="mt-1 font-display italic text-sm text-[#777]">
+              <p className="mt-1 font-display italic text-sm text-[#666]">
                 {featured.title}
               </p>
             </motion.div>
@@ -142,13 +138,13 @@ export default function SophisticatedHero() {
         transition={{ delay: 2.5, duration: 1 }}
         className="absolute bottom-8 left-8 z-10 flex items-center gap-4 lg:left-16"
       >
-        <span className="text-[9px] font-body uppercase tracking-[0.3em] text-[#444]">
+        <span className="text-[9px] font-body uppercase tracking-[0.3em] text-[#bbb]">
           Scroll
         </span>
         <motion.div
           animate={{ height: [16, 32, 16] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px bg-[#333]"
+          className="w-px bg-[#ccc]"
         />
       </motion.div>
     </section>

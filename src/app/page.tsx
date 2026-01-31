@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/hero";
+import Preloader from "@/components/Preloader";
 
-const Preloader = dynamic(() => import("@/components/Preloader"));
 const Gallery = dynamic(() => import("@/components/gallery"));
 const About = dynamic(() => import("@/components/About"));
 const Exhibitions = dynamic(() => import("@/components/Exhibitions"));
