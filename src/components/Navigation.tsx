@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { useBodyScrollLock } from "@/hooks/use-body-scroll-lock";
 import { siteContent } from "@/lib/data";
@@ -67,6 +68,12 @@ export default function Navigation() {
                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
+            <Link
+              href="/sophisticated"
+              className="ml-2 rounded-full border border-cream/10 px-4 py-1.5 text-[9px] font-body uppercase tracking-[0.15em] text-cream/30 transition-all duration-300 hover:border-gold/30 hover:text-cream/60"
+            >
+              B&amp;W Edition
+            </Link>
           </div>
 
           {/* Hamburger */}

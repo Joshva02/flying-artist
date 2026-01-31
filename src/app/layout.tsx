@@ -17,7 +17,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Shannon Hutchinson \u2014 The Flying Artist",
+  title: "Shannon Hutchinson — The Flying Artist",
   description:
     "Portfolio of Shannon Hutchinson, a Trinidadian visual artist and Boeing 787 pilot. Explore five solo exhibitions of landscape paintings inspired by Caribbean light, atmosphere, and the view from 40,000 feet.",
   keywords: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "contemporary art",
   ],
   openGraph: {
-    title: "Shannon Hutchinson \u2014 The Flying Artist",
+    title: "Shannon Hutchinson — The Flying Artist",
     description:
       "Trinidadian visual artist and Boeing 787 pilot. Five solo exhibitions of landscape paintings inspired by Caribbean light and atmosphere.",
     type: "website",
