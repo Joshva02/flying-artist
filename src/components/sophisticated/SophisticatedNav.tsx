@@ -116,6 +116,20 @@ export default function SophisticatedNav() {
             transition={{ duration: 0.5 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0a0a0a]/[0.98] backdrop-blur-3xl md:hidden"
           >
+            {/* Close button */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.1] text-[#777] transition-colors hover:text-[#f5f5f5]"
+              aria-label="Close menu"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </motion.button>
+
             <nav className="flex flex-col items-center gap-10">
               {siteContent.navigation.map((link, i) => (
                 <motion.button
@@ -138,7 +152,7 @@ export default function SophisticatedNav() {
                 <Link
                   href="/"
                   onClick={() => setMenuOpen(false)}
-                  className="mt-4 inline-block rounded-full border border-white/[0.12] px-6 py-2 text-[10px] font-body uppercase tracking-[0.2em] text-[#666] transition-all hover:text-[#aaa]"
+                  className="mt-4 inline-block rounded-full border border-white/[0.12] px-6 py-2.5 text-[10px] font-body uppercase tracking-[0.2em] text-[#666] transition-all hover:text-[#aaa]"
                 >
                   Warm Edition
                 </Link>

@@ -126,6 +126,20 @@ export default function Navigation() {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-midnight/98 backdrop-blur-2xl md:hidden"
           >
+            {/* Close button */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-cream/10 text-cream/50 transition-colors hover:text-cream"
+              aria-label="Close menu"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </motion.button>
+
             {/* Decorative background glow */}
             <div
               className="pointer-events-none absolute inset-0 opacity-20"
@@ -154,6 +168,19 @@ export default function Navigation() {
                   {link.label}
                 </motion.a>
               ))}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Link
+                  href="/sophisticated"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-4 inline-block rounded-full border border-cream/10 px-6 py-2.5 text-[10px] font-body uppercase tracking-[0.15em] text-cream/30 transition-all hover:border-gold/30 hover:text-cream/60"
+                >
+                  B&amp;W Edition
+                </Link>
+              </motion.div>
             </nav>
 
             {/* Bottom tagline */}
